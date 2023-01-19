@@ -2,7 +2,7 @@ package api.views;
 
 import com.google.gson.Gson;
 
-public class view {
+public class View {
     
     // Gson- Para transformar los datos a JSON
     private static Gson gson = new Gson();

@@ -74,9 +74,9 @@ public class Employed {
             String sql = String.format("SELECT * FROM %s", table); // Le mandamos a la base d edatos esta consulta
             ResultSet rs = statement.executeQuery(sql); // Hacemos una consulta sql, aqui ya tenemos las filas
 
-            List<EmployedPayload> employeds = new ArrayList<>();
+            List<EmployedPayload> employeds = new ArrayList<>(); // Creamos una lista de Payloads
 
-            while(rs.next()) { // Un bucle que si hay siguiente elemento haga algo
+            while(rs.next()) { // Un bucle que si hay siguiente elemento haga algo, en este caso nos crea la lista de payloads creada arriba, rellenando todos los parametros necesarios
                 EmployedPayload employed = new EmployedPayload();
                 employed.setId(rs.getLong("id"));
                 employed.setName(rs.getString("nameEmployed"));
