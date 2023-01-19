@@ -5,6 +5,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import api.payloads.EmployedPayload;
 import api.repositories.mysql.MysqlConnexion;
 
 public class Employed {
@@ -66,22 +67,23 @@ public class Employed {
 
         
 
-    public List<Employed>index() { // Este metodo nos devuevle todos los empleados
+    public List<EmployedPayload> index() { // Este metodo nos devuevle todos los empleados
 
         try {
             Statement statement = repository.conn.createStatement(); // Con esta linea y la creaccion de arriba tengo acceso a la conexion
             String sql = String.format("SELECT * FROM %s", table); // Le mandamos a la base d edatos esta consulta
             ResultSet rs = statement.executeQuery(sql); // Hacemos una consulta sql, aqui ya tenemos las filas
 
-            List<Employed> employeds = new ArrayList<>();
+            List<EmployedPayload> employeds = new ArrayList<>();
 
             while(rs.next()) { // Un bucle que si hay siguiente elemento haga algo
-                this.id = rs.getLong("id");
-                this.name = rs.getString("nameEmployed");
-                this.surname = rs.getString("surname");
-                this.typeRequest = rs.getString("typeRequest");
-                this.descripcion = rs.getString("descripcion");
-                employeds.add(this);
+                EmployedPayload employed = new EmployedPayload();
+                employed.setId(rs.getLong("id"));
+                employed.setName(rs.getString("nameEmployed"));
+                employed.setSurname(rs.getString("surname"));
+                employed.setTypeRequest(rs.getString("typeRequest"));
+                employed.setDescripcion(rs.getString("descripcion"));
+                employeds.add(employed);
             }
 
             System.out.println(employeds);

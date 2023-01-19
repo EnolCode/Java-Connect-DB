@@ -2,7 +2,11 @@ package api.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+
 import api.models.Employed;
+import api.payloads.EmployedPayload;
+import api.views.view;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,8 +24,10 @@ public class EmployedController extends HttpServlet { // Con este objeto tenemos
         PrintWriter out = resp.getWriter(); // El objeto que devolveremos en la salida.
 
         Employed employed = new Employed();
+        List<EmployedPayload> employeds =  employed.index(); // Pasamos a la vista la lista de nuestros empleados en payloads
 
-        out.println(employed.index());
+
+        out.println(view.show(employeds));
 
     }
     
